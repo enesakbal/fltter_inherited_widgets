@@ -1,5 +1,6 @@
-import 'package:fltter_inherited_widgets/simple_examples/counter_example/counter_inherited_widget.dart';
-import 'package:fltter_inherited_widgets/simple_examples/counter_example/counter_service.dart';
+import 'dart:developer';
+
+import 'package:fltter_inherited_widgets/simple_examples/counter_example/counter.dart';
 import 'package:flutter/material.dart';
 
 class CounterView extends StatelessWidget {
@@ -7,47 +8,46 @@ class CounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final xxx = CounterService();
+    log('called CounterView build');
 
-    return CounterInheritedWidget(
-      counterService: xxx,
-      child: Builder(builder: (context) {
-        final counterService = CounterInheritedWidget.of(context).counterService;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Inherited Widget Example'),
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('You have pushed the button this many times:'),
+            CounterText(),
+          ],
+        ),
+      ),
+      floatingActionButton: const IncrementButton(),
+    );
+  }
+}
 
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Counter Example'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                Builder(
-                  builder: (context) {
-                    print('object');
-                    return Text(
-                      '${counterService.counter}',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          floatingActionButton: Builder(builder: (context) {
-            return FloatingActionButton(
-              onPressed: () {
-                CounterInheritedWidget.of(context).counterService.increment();
-              },
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            );
-          }),
-        );
-      }),
+class CounterText extends StatelessWidget {
+  const CounterText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Counter.of(context);
+    return Text('${provider.counter}');
+  }
+}
+
+class IncrementButton extends StatelessWidget {
+  const IncrementButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final counter = Counter.of(context);
+    return FloatingActionButton(
+      onPressed: counter.increment,
+      tooltip: 'Increment',
+      child: const Icon(Icons.add),
     );
   }
 }
