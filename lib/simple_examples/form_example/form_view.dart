@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:fltter_inherited_widgets/simple_examples/form_example/form_state.dart';
-import 'package:fltter_inherited_widgets/simple_examples/form_example/user_model.dart';
 import 'package:flutter/material.dart';
 
 class FormView extends StatelessWidget {
@@ -8,7 +9,7 @@ class FormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = CustomFormState.of(context);
-
+    log('message');
     return Scaffold(
       appBar: AppBar(title: const Text('Form Example')),
       body: Padding(
@@ -52,11 +53,9 @@ class FormView extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         state.setUserModel(
-                          UserModel(
-                            name: state.nameController.text,
-                            email: state.emailController.text,
-                            password: state.passwordController.text,
-                          ),
+                          name: state.nameController.text,
+                          email: state.emailController.text,
+                          password: state.passwordController.text,
                         );
                       },
                       child: const Text('Submit'),
@@ -75,17 +74,17 @@ class FormView extends StatelessWidget {
                     ),
                     const SizedBox(height: 48),
                     Text(
-                      'Name: ${state.userModel?.name ?? ''}',
+                      'Name: ${state.userModel.name ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Email: ${state.userModel?.email ?? ''}',
+                      'Email: ${state.userModel.email ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Password: ${state.userModel?.password ?? ''}',
+                      'Password: ${state.userModel.password ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ],

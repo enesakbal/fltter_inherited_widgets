@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
   final String? name;
   final String? email;
@@ -15,4 +14,16 @@ class UserModel {
 
   @override
   int get hashCode => name.hashCode ^ email.hashCode ^ password.hashCode;
+
+  UserModel copyWith({
+    String? name,
+    String? email,
+    String? password,
+  }) {
+    return UserModel(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      password: password ?? this.password,
+    );
+  }
 }

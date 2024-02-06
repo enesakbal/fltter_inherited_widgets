@@ -12,24 +12,21 @@ class FormProvider extends StatefulWidget {
 }
 
 class _FormProviderState extends State<FormProvider> {
-  late UserModel userModel;
+  late final UserModel userModel;
 
   @override
   void initState() {
-    userModel = UserModel();
+    userModel = UserModel(
+      name: 'John Doe',
+      email: 'john@gmail.com',
+      password: '123',
+    );
     super.initState();
-  }
-
-  setUserModel(UserModel newUserModel) {
-    setState(() {
-      userModel = newUserModel;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomFormState(
-      setUserModel: setUserModel,
       userModel: userModel,
       child: widget.child,
     );

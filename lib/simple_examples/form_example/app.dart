@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const CounterApp(),
+    const FormApp(),
   );
 }
 
-class CounterApp extends StatelessWidget {
-  const CounterApp({super.key});
+class FormApp extends StatelessWidget {
+  const FormApp({super.key});
 
   @override
   Widget build(BuildContext context) {
