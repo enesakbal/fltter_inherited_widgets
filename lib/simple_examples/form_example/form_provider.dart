@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fltter_inherited_widgets/simple_examples/form_example/form_state.dart';
 import 'package:fltter_inherited_widgets/simple_examples/form_example/user_model.dart';
 import 'package:flutter/material.dart';
@@ -12,22 +14,30 @@ class FormProvider extends StatefulWidget {
 }
 
 class _FormProviderState extends State<FormProvider> {
-  late final UserModel userModel;
+  late UserModel userModel;
 
   @override
   void initState() {
-    userModel = UserModel(
-      name: 'John Doe',
-      email: 'john@gmail.com',
-      password: '123',
-    );
+    userModel = UserModel();
     super.initState();
+  }
+
+  void setUser(UserModel newUserModel) {
+    setState(() {
+      userModel = userModel.copyWith(
+        password: newUserModel.password,
+        email: newUserModel.email,
+        name: newUserModel.name,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    log('called FormProvider build');
     return CustomFormState(
       userModel: userModel,
+      setUser: setUser,
       child: widget.child,
     );
   }

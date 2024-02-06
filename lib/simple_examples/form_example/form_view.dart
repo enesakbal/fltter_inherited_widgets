@@ -8,23 +8,23 @@ class FormView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = CustomFormState.of(context);
-    log('message');
+    log('called FormView build');
     return Scaffold(
       appBar: AppBar(title: const Text('Form Example')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Form(
-          key: state.formKey,
+          key: CustomFormState.of(context).formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
+                flex: 4,
                 child: Column(
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Name'),
-                      controller: state.nameController,
+                      controller: CustomFormState.of(context).nameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your name';
@@ -35,7 +35,7 @@ class FormView extends StatelessWidget {
                     const SizedBox(height: 24),
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Email'),
-                      controller: state.emailController,
+                      controller: CustomFormState.of(context).emailController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
@@ -46,25 +46,22 @@ class FormView extends StatelessWidget {
                     const SizedBox(height: 24),
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Password'),
-                      controller: state.passwordController,
+                      controller: CustomFormState.of(context).passwordController,
                       obscureText: true,
                     ),
                     const SizedBox(height: 48),
                     ElevatedButton(
                       onPressed: () {
-                        state.setUserModel(
-                          name: state.nameController.text,
-                          email: state.emailController.text,
-                          password: state.passwordController.text,
-                        );
+                        CustomFormState.of(context).updateUser();
                       },
                       child: const Text('Submit'),
                     ),
                   ],
                 ),
               ),
-              const Divider(),
+              const Spacer(),
               Expanded(
+                flex: 4,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,17 +71,17 @@ class FormView extends StatelessWidget {
                     ),
                     const SizedBox(height: 48),
                     Text(
-                      'Name: ${state.userModel.name ?? ''}',
+                      'Name: ${CustomFormState.of(context).userModel.name ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Email: ${state.userModel.email ?? ''}',
+                      'Email: ${CustomFormState.of(context).userModel.email ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Password: ${state.userModel.password ?? ''}',
+                      'Password: ${CustomFormState.of(context).userModel.password ?? ''}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ],
