@@ -1,3 +1,5 @@
+import 'package:cat_app/inherited/cat_api_provider.dart';
+import 'package:cat_app/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,11 +11,10 @@ class CatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
+    return const MaterialApp(
+      home: CatApiProvider(
+        child: HomeView(),
       ),
-      body: Container(),
     );
   }
 }
