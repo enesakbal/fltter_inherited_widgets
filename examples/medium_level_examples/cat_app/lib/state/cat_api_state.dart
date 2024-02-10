@@ -7,11 +7,28 @@ class CatApiState extends InheritedWidget {
     required this.catList,
     required this.fetchCats,
     super.key,
-  }) : scrollController = ScrollController();
+  }) {
+    scrollController = ScrollController()..addListener(_scrollListener);
+  }
 
-  final ScrollController scrollController;
   final List<CatModel> catList;
   final VoidCallback fetchCats;
+
+  late final ScrollController scrollController;
+
+  void _scrollListener() async {
+    final isBottom = scrollController.position.maxScrollExtent == scrollController.offset &&
+        scrollController.position.pixels == scrollController.position.maxScrollExtent;
+
+    if (isBottom) {
+      fetchCats.call();
+    }
+  }
+
+  void dispose() {
+    scrollController.removeListener(_scrollListener);
+    scrollController.dispose();
+  }
 
   static CatApiState? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CatApiState>();

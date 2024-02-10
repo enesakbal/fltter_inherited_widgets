@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cat_app/state/cat_api_state.dart';
 import 'package:flutter/material.dart';
 
@@ -6,19 +8,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('home view build');
+
     return Scaffold(
       appBar: AppBar(title: const Text('Cat App')),
-      floatingActionButton: FloatingActionButton(
-        onPressed: CatApiState.of(context)?.fetchCats,
-        child: const Icon(Icons.add),
-      ),
-      body: const Column(
-        children: [
-          Expanded(
-            child: _CatListWidget(),
-          ),
-        ],
-      ),
+      body: const _CatListWidget(),
     );
   }
 }
@@ -30,13 +24,35 @@ class _CatListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final catApiState = CatApiState.of(context);
 
-    return ListView.separated(
-      itemCount: catApiState?.catList.length ?? 0,
-      itemBuilder: (context, index) {
-        final item = catApiState?.catList[index];
-        return Image.network(item?.url ?? '');
-      },
-      separatorBuilder: (context, index) => const Divider(),
+    print('cat list widget build');
+
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      controller: catApiState?.scrollController,
+      children: [
+        GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: catApiState?.catList.length ?? 0,
+          itemBuilder: (context, index) {
+            final item = catApiState?.catList[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(item?.url ?? ''),
+            );
+          },
+        ),
+        const SizedBox(
+          height: 100,
+          child: Center(child: CircularProgressIndicator.adaptive()),
+        ),
+      ],
     );
   }
 }

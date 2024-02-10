@@ -13,25 +13,30 @@ class CatApiProvider extends StatefulWidget {
 }
 
 class _CatApiProviderState extends State<CatApiProvider> {
-  late final List<CatModel> catList;
+  late List<CatModel> catList;
   late final CatApiService catApiService;
 
   @override
   void initState() {
     catList = [];
     catApiService = const CatApiService();
+
+    fetchCats();
     super.initState();
   }
 
-  void fetchCats() async {
+  Future<void> fetchCats() async {
     final cats = await catApiService.fetchCats();
+
     setState(() {
-      catList.addAll(cats);
+      catList = List.from(catList..addAll(cats));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('provider build');
+
     return CatApiState(
       catList: catList,
       fetchCats: fetchCats,
