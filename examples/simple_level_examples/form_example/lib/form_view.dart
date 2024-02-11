@@ -61,7 +61,7 @@ class FormView extends StatelessWidget {
               ),
               const Spacer(),
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
