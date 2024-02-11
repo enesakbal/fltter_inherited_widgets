@@ -10,6 +10,20 @@ dependencies:
   flutter:
     sdk: flutter
 
+  ## Simple Examples
+  counter_example:
+    path: ./examples/simple_level_examples/counter_example
+  background_color_example:
+    path: ./examples/simple_level_examples/background_color_example
+  form_example:
+    path: ./examples/simple_level_examples/form_example
+
+
+  ## Medium Examples
+  cat_app:
+    path: ./examples/medium_level_examples/cat_app
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
