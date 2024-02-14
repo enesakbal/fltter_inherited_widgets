@@ -1,13 +1,16 @@
+import 'package:rick_and_morty_app/src/models/character_model/character_listings_model.dart';
 import 'package:rick_and_morty_app/src/models/character_model/character_model.dart';
 
 abstract class CharacterRepository {
-  Future<List<CharacterModel>> getCharacters();
+  Future<CharacterListingsModel> nextPage(String url);
 
-  Future<CharacterModel> getCharacter(int id);
+  Future<CharacterListingsModel> getCharacters();
 
-  Future<List<CharacterModel>> getMultiCharacter(List<int> ids);
+  Future<CharacterModel?> getCharacter(int? id);
 
-  Future<List<CharacterModel>> filterCharacter({
+  Future<CharacterListingsModel?> getMultiCharacter(List<int>? ids);
+
+  Future<CharacterListingsModel?> getFilteredCharacter({
     String? name,
     String? status,
     String? species,
