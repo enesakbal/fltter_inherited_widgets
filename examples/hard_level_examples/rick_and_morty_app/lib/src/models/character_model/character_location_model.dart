@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-class LocationModel {
+class CharacterLocationModel {
   String? name;
   String? url;
 
-  LocationModel({this.name, this.url});
+  CharacterLocationModel({this.name, this.url});
 
-  factory LocationModel.fromMap(Map<String, dynamic> data) => LocationModel(
+  factory CharacterLocationModel.fromMap(Map<String, dynamic> data) => CharacterLocationModel(
         name: data['name'] as String?,
         url: data['url'] as String?,
       );
@@ -21,8 +21,8 @@ class LocationModel {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [LocationModel].
-  factory LocationModel.fromJson(String data) {
-    return LocationModel.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory CharacterLocationModel.fromJson(String data) {
+    return CharacterLocationModel.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
@@ -33,7 +33,7 @@ class LocationModel {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! LocationModel) return false;
+    if (other is! CharacterLocationModel) return false;
     final mapEquals = const DeepCollectionEquality().equals;
     return mapEquals(other.toMap(), toMap());
   }

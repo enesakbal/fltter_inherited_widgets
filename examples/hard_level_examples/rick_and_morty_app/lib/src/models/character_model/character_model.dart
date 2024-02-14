@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:rick_and_morty_app/src/models/character_model/location_model.dart';
-
-import 'origin_model.dart';
+import 'package:rick_and_morty_app/src/models/character_model/character_location_model.dart';
 
 class CharacterModel {
   int? id;
@@ -12,8 +10,8 @@ class CharacterModel {
   String? species;
   String? type;
   String? gender;
-  OriginModel? origin;
-  LocationModel? location;
+  CharacterLocationModel? origin;
+  CharacterLocationModel? location;
   String? image;
   List<String>? episode;
   String? url;
@@ -42,9 +40,10 @@ class CharacterModel {
       species: data['species'] as String?,
       type: data['type'] as String?,
       gender: data['gender'] as String?,
-      origin: data['origin'] == null ? null : OriginModel.fromMap(data['origin'] as Map<String, dynamic>),
-      location:
-          data['locationModel'] == null ? null : LocationModel.fromMap(data['locationModel'] as Map<String, dynamic>),
+      origin: data['origin'] == null ? null : CharacterLocationModel.fromMap(data['origin'] as Map<String, dynamic>),
+      location: data['locationModel'] == null
+          ? null
+          : CharacterLocationModel.fromMap(data['locationModel'] as Map<String, dynamic>),
       image: data['image'] as String?,
       episode: data['episode'] as List<String>?,
       url: data['url'] as String?,
