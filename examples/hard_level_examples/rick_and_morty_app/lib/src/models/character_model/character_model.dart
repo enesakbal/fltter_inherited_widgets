@@ -41,11 +41,11 @@ class CharacterModel {
       type: data['type'] as String?,
       gender: data['gender'] as String?,
       origin: data['origin'] == null ? null : CharacterLocationModel.fromMap(data['origin'] as Map<String, dynamic>),
-      location: data['locationModel'] == null
+      location: data['location'] == null
           ? null
-          : CharacterLocationModel.fromMap(data['locationModel'] as Map<String, dynamic>),
+          : CharacterLocationModel.fromMap(data['location'] as Map<String, dynamic>),
       image: data['image'] as String?,
-      episode: data['episode'] as List<String>?,
+      episode:  (data['episode'] as List<dynamic>?)?.map((e) => e as String).toList(),
       url: data['url'] as String?,
       created: data['created'] == null ? null : DateTime.parse(data['created'] as String),
     );

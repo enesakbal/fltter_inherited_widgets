@@ -28,7 +28,7 @@ class EpisodeListingsModel {
       info: map['info'] != null ? InfoModel.fromMap(map['info'] as Map<String, dynamic>) : null,
       results: map['results'] != null
           ? List<EpisodeModel>.from(
-              (map['results'] as List<int>).map<EpisodeModel?>(
+              (map['results'] as List<dynamic>).map<EpisodeModel?>(
                 (x) => EpisodeModel.fromMap(x as Map<String, dynamic>),
               ),
             )

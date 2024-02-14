@@ -28,7 +28,7 @@ class CharacterListingsModel {
       info: map['info'] != null ? InfoModel.fromMap(map['info'] as Map<String, dynamic>) : null,
       results: map['results'] != null
           ? List<CharacterModel>.from(
-              (map['results'] as List<int>).map<CharacterModel?>(
+              (map['results'] as List<dynamic>).map<CharacterModel?>(
                 (x) => CharacterModel.fromMap(x as Map<String, dynamic>),
               ),
             )

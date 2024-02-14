@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class InfoModel {
-  final String? count;
-  final String? pages;
+  final int? count;
+  final int? pages;
   final String? next;
   final String? prev;
 
@@ -15,10 +15,10 @@ class InfoModel {
 
   factory InfoModel.fromMap(Map<String, dynamic> map) {
     return InfoModel(
-      count: map['count'] != null ? map['count'] as String : null,
-      pages: map['pages'] != null ? map['pages'] as String : null,
-      next: map['next'] != null ? map['next'] as String : null,
-      prev: map['prev'] != null ? map['prev'] as String : null,
+      count: map['count'] != null ? map['count'] as int? : null,
+      pages: map['pages'] != null ? map['pages'] as int? : null,
+      next: map['next'] != null ? map['next'] as String? : null,
+      prev: map['prev'] != null ? map['prev'] as String? : null,
     );
   }
 

@@ -26,7 +26,7 @@ class LocationModel {
         name: data['name'] as String?,
         type: data['type'] as String?,
         dimension: data['dimension'] as String?,
-        residents: data['residents'] as List<String>?,
+        residents:  (data['residents'] as List<dynamic>?)?.map((e) => e as String).toList(),
         url: data['url'] as String?,
         created: data['created'] == null ? null : DateTime.parse(data['created'] as String),
       );

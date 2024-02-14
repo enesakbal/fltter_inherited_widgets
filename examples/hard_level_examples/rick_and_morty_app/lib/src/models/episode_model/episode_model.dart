@@ -26,7 +26,7 @@ class EpisodeModel {
         name: data['name'] as String?,
         airDate: data['air_date'] as String?,
         episode: data['episode'] as String?,
-        characters: data['characters'] as List<String>?,
+        characters: (data['characters'] as List<dynamic>?)?.map((e) => e as String).toList(),
         url: data['url'] as String?,
         created: data['created'] == null ? null : DateTime.parse(data['created'] as String),
       );

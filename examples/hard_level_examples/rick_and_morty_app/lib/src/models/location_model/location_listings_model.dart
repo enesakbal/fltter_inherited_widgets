@@ -7,28 +7,18 @@ import 'package:rick_and_morty_app/src/models/location_model/location_model.dart
 class LocationListingsModel {
   final InfoModel? info;
   final List<LocationModel>? results;
-  
+
   LocationListingsModel({
     this.info,
     this.results,
   });
-
-  LocationListingsModel copyWith({
-    InfoModel? info,
-    List<LocationModel>? results,
-  }) {
-    return LocationListingsModel(
-      info: info ?? this.info,
-      results: results ?? this.results,
-    );
-  }
 
   factory LocationListingsModel.fromMap(Map<String, dynamic> map) {
     return LocationListingsModel(
       info: map['info'] != null ? InfoModel.fromMap(map['info'] as Map<String, dynamic>) : null,
       results: map['results'] != null
           ? List<LocationModel>.from(
-              (map['results'] as List<int>).map<LocationModel?>(
+              (map['results'] as List<dynamic>).map<LocationModel?>(
                 (x) => LocationModel.fromMap(x as Map<String, dynamic>),
               ),
             )
