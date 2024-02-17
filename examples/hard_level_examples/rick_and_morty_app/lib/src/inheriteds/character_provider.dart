@@ -54,13 +54,13 @@ class _CharacterProviderState extends State<CharacterProvider> {
       type: type,
     );
 
-    _characters = _characters = List.from(_characters + (characters?.results ?? []));
+    _characters = List.from((characters?.results ?? []));
     setState(() {});
   }
 
   void fetchMultiCharacters(List<int>? ids) async {
     final characters = await widget.characterService.getMultiCharacter(ids);
-    _characters = List.from(_characters + (characters?.results ?? []));
+    _characters = List.from((characters?.results ?? []));
     setState(() {});
   }
 
