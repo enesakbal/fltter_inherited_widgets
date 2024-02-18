@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/src/models/character_model/character_model.dart';
 
 class CharacterState extends InheritedWidget {
-  const CharacterState({
+  CharacterState({
     super.key,
     required super.child,
     required this.characters,
@@ -10,7 +10,13 @@ class CharacterState extends InheritedWidget {
     required this.fetchNextPage,
     required this.fetchFilteredCharacters,
     required this.fetchMultiCharacters,
-  });
+  }) {
+    scrollController = ScrollController();
+
+    scrollController.addListener(_scrollListener);
+  }
+
+  late final ScrollController scrollController;
 
   final List<CharacterModel> characters;
 
@@ -28,6 +34,15 @@ class CharacterState extends InheritedWidget {
     assert(context.dependOnInheritedWidgetOfExactType<CharacterState>() != null,
         'You need to wrap your widget with CharacterProvider');
     return context.dependOnInheritedWidgetOfExactType<CharacterState>()!;
+  }
+
+  void _scrollListener() async {
+    final isBottom = scrollController.position.maxScrollExtent == scrollController.offset &&
+        scrollController.position.pixels == scrollController.position.maxScrollExtent;
+
+    if (isBottom) {
+      fetchNextPage.call();
+    }
   }
 
   @override

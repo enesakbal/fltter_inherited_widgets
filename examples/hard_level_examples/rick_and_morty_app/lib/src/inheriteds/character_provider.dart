@@ -29,15 +29,15 @@ class _CharacterProviderState extends State<CharacterProvider> {
 
   void fetchCharacters() async {
     final characters = await widget.characterService.getCharacters();
-    _characters = List.from(_characters + (characters.results ?? []));
-    lastCharacters = characters;
+    _characters = List.from(_characters + (characters?.results ?? []));
+    lastCharacters = characters ?? CharacterListingsModel();
     setState(() {});
   }
 
   void fetchNextPage() async {
     final characters = await widget.characterService.nextPage(lastCharacters.info?.next ?? '');
 
-    _characters = List.from(_characters + (characters.results ?? []));
+    _characters = List.from(_characters + (characters?.results ?? []));
     setState(() {});
   }
 

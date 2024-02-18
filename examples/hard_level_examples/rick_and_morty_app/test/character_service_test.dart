@@ -13,11 +13,11 @@ void main() {
     final list = <CharacterListingsModel>[];
     final response = await characterRepository.getCharacters();
 
-    list.add(response);
+    list.add(response ?? CharacterListingsModel());
 
-    final response2 = await characterRepository.nextPage(response.info!.next!);
+    final response2 = await characterRepository.nextPage(response?.info?.next ?? '');
 
-    list.add(response2);
+    list.add(response2 ?? CharacterListingsModel());
 
     expect(list.length, 2);
     expect(list.expand((element) => element.results?.toList() ?? []).toList().length, 40);
