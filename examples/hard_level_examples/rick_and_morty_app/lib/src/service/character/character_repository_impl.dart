@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:rick_and_morty_app/src/core/app_constants.dart';
 import 'package:rick_and_morty_app/src/core/network/network_manager.dart';
 import 'package:rick_and_morty_app/src/models/character_model/character_listings_model.dart';
@@ -15,17 +17,19 @@ class CharacterRepositoryImpl implements CharacterRepository {
       final response = await _networkManager.get('${AppConstants.charactersPath}/$id');
       return CharacterModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      log('error: $e');
+      return null;
     }
   }
 
   @override
-  Future<CharacterListingsModel> getCharacters() async {
+  Future<CharacterListingsModel?> getCharacters() async {
     try {
       final response = await _networkManager.get(AppConstants.charactersPath);
       return CharacterListingsModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      log('error: $e');
+      return null;
     }
   }
 
@@ -50,7 +54,8 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
       return CharacterListingsModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      log('error: $e');
+      return null;
     }
   }
 
@@ -61,18 +66,20 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
       return CharacterListingsModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      log('error: $e');
+      return null;
     }
   }
 
   @override
-  Future<CharacterListingsModel> nextPage(String url) async {
+  Future<CharacterListingsModel?> nextPage(String url) async {
     try {
       final response = await _networkManager.get(url);
 
       return CharacterListingsModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
-      rethrow;
+      log('error: $e');
+      return null;
     }
   }
 }

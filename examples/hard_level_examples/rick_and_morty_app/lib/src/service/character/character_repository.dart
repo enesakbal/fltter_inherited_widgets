@@ -2,9 +2,9 @@ import 'package:rick_and_morty_app/src/models/character_model/character_listings
 import 'package:rick_and_morty_app/src/models/character_model/character_model.dart';
 
 abstract class CharacterRepository {
-  Future<CharacterListingsModel> nextPage(String url);
+  Future<CharacterListingsModel?> nextPage(String url);
 
-  Future<CharacterListingsModel> getCharacters();
+  Future<CharacterListingsModel?> getCharacters();
 
   Future<CharacterModel?> getCharacter(int? id);
 
